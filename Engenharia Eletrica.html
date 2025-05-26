@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto de Engenharia Elétrica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        electric: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                            600: '#475569',
+                            500: '#64748b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .video-container {
+            aspect-ratio: 9/16;
+            max-height: 80vh;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .video-container:hover {
+            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.25);
+        }
+        
+        .member-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+        
+        .member-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1), 0 4px 6px -2px rgba(59, 130, 246, 0.05);
+        }
+        
+        .circuit-pattern {
+            background-image: radial-gradient(rgba(30, 58, 138, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #3b82f6, #60a5fa);
+        }
+        
+        .avatar-ring {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+        }
+        
+        .tag {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .play-button {
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-dark-900 text-gray-200 font-sans circuit-pattern">
+    <!-- Main container -->
+    <div class="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
+        <!-- Header -->
+        <header class="text-center mb-12 md:mb-16">
+            <div class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-dark-800 mb-6">
+                <i class="fas fa-bolt text-electric-400 mr-2"></i>
+                <span class="text-sm font-medium text-electric-400">ENGENHARIA ELÉTRICA</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                <span class="gradient-text">Projeto Acadêmico</span>
+            </h1>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                Explorando as fronteiras da energia e tecnologia
+            </p>
+        </header>
+        
+        <!-- Video section -->
+        <section class="flex justify-center mb-16 md:mb-20">
+            <div class="video-container bg-dark-800 rounded-2xl overflow-hidden relative w-full max-w-md">
+                <!-- Video placeholder -->
+                <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-dark-800 to-dark-900">
+                    <div class="text-center p-8">
+                        <div class="play-button inline-flex items-center justify-center w-16 h-16 rounded-full bg-electric-600 mb-4">
+                            <i class="fas fa-play text-xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Entrevista em Vídeo</h3>
+                        <p class="text-electric-300 text-sm">Clique para reproduzir</p>
+                    </div>
+                </div>
+                <!-- Actual video would go here -->
+            </div>
+        </section>
+        
+        <!-- Team section -->
+        <section class="mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-3">Conheça Nosso <span class="gradient-text">Time</span></h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-electric-500 to-electric-600 mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <!-- Member 1 -->
+                <div class="member-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 rounded-full bg-dark-700 flex items-center justify-center mr-4 avatar-ring">
+                            <i class="fas fa-user text-xl text-electric-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">Gabriel Molossi</h3>
+                            <p class="text-electric-400 text-sm">N° 13</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                        Responsável pelas idéias e apresentação do projeto, garantindo clareza e impacto na comunicação.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400">Idéias</span>
+                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400">Apresentação</span>
+                    </div>
+                </div>
+                
+                <!-- Member 2 -->
+                <div class="member-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 rounded-full bg-dark-700 flex items-center justify-center mr-4 avatar-ring">
+                            <i class="fas fa-user text-xl text-electric-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">Alex Junior</h3>
+                            <p class="text-electric-400 text-sm">N° 1</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                        Responsável pela pesquisa e apresentação, assegurando fundamentação teórica e precisão nos dados.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400">Pesquisa</span>
+                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400">Apresentação</span>
+                    </div>
+                </div>
+                
+                <!-- Member 3 -->
+                <div class="member-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 rounded-full bg-dark-700 flex items-center justify-center mr-4 avatar-ring">
+                            <i class="fas fa-user text-xl text-electric-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">Elber</h3>
+                            <p class="text-electric-400 text-sm">N° 9</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                        Responsável pelo desenvolvimento e apresentação, implementando soluções práticas e eficientes.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400">Desenvolvimento</span>
+                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400">Apresentação</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="text-center pt-8 border-t border-dark-700 mt-12">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="text-gray-400 hover:text-electric-400 transition-colors">
+                    <i class="fab fa-youtube text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-electric-400 transition-colors">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-electric-400 transition-colors">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+            </div>
+            <p class="text-gray-500 text-sm">
+                Projeto acadêmico - Engenharia Elétrica © <span id="current-year"></span>
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Video play functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const videoPlaceholder = document.querySelector('.video-container');
+            if (videoPlaceholder) {
+                videoPlaceholder.addEventListener('click', () => {
+                    const playButton = videoPlaceholder.querySelector('.play-button');
+                    const playIcon = videoPlaceholder.querySelector('.fa-play');
+                    
+                    if (playIcon) {
+                        playIcon.classList.remove('fa-play');
+                        playIcon.classList.add('fa-pause');
+                        
+                        // Here you would normally play the actual video
+                        // For this demo, we'll just change the background
+                        videoPlaceholder.style.background = `
+                            linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), 
+                            url(https://images.unsplash.com/photo-1508514177221-188e1eaf2cc5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1080&q=80) center/cover
+                        `;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
