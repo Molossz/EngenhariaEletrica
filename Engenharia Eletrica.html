@@ -33,6 +33,16 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                     },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
                 }
             }
         }
@@ -40,32 +50,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .video-container {
-            aspect-ratio: 9/16;
-            max-height: 80vh;
-            transition: all 0.3s ease;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        .video-container:hover {
-            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.25);
-        }
-        
-        .member-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: linear-gradient(145deg, #1e293b, #0f172a);
-            border: 1px solid rgba(59, 130, 246, 0.1);
-        }
-        
-        .member-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(59, 130, 246, 0.3);
-            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1), 0 4px 6px -2px rgba(59, 130, 246, 0.05);
-        }
-        
         .circuit-pattern {
-            background-image: radial-gradient(rgba(30, 58, 138, 0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
+            background-image: 
+                radial-gradient(rgba(30, 58, 138, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 1));
+            background-size: 20px 20px, 100% 100%;
         }
         
         .gradient-text {
@@ -75,13 +64,78 @@
             background-image: linear-gradient(90deg, #3b82f6, #60a5fa);
         }
         
+        .video-container {
+            aspect-ratio: 16/9;
+            max-height: 80vh;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .video-container:hover {
+            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .member-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(59, 130, 246, 0) 0%,
+                rgba(59, 130, 246, 0.1) 50%,
+                rgba(59, 130, 246, 0) 100%
+            );
+            transform: rotate(30deg);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+        
+        .member-card:hover::before {
+            opacity: 1;
+            top: -30%;
+            left: -30%;
+        }
+        
+        .member-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.05);
+        }
+        
         .avatar-ring {
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .member-card:hover .avatar-ring {
+            box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.8);
+            transform: scale(1.05);
         }
         
         .tag {
             background: rgba(59, 130, 246, 0.1);
             border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.2s ease;
+        }
+        
+        .tag:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
         }
         
         .play-button {
@@ -91,44 +145,129 @@
         .play-button:hover {
             transform: scale(1.1);
         }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0), rgba(59, 130, 246, 0.5), rgba(59, 130, 246, 0));
+            margin: 3rem auto;
+            max-width: 800px;
+        }
+        
+        .electric-pulse {
+            animation: pulse-slow 4s infinite;
+        }
+        
+        .floating-icon {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-icon:nth-child(2) {
+            animation-delay: 1s;
+        }
+        
+        .floating-icon:nth-child(3) {
+            animation-delay: 2s;
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.1);
+            color: #3b82f6 !important;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(59, 130, 246, 0.2);
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 100;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: rgba(59, 130, 246, 0.3);
+            transform: translateY(-5px);
+        }
     </style>
 </head>
 <body class="min-h-screen bg-dark-900 text-gray-200 font-sans circuit-pattern">
+    <!-- Floating decorative elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-1/4 left-1/4 text-electric-400 opacity-10 floating-icon">
+            <i class="fas fa-bolt text-6xl"></i>
+        </div>
+        <div class="absolute top-1/3 right-1/4 text-electric-500 opacity-15 floating-icon">
+            <i class="fas fa-microchip text-5xl"></i>
+        </div>
+        <div class="absolute bottom-1/4 left-1/3 text-electric-600 opacity-10 floating-icon">
+            <i class="fas fa-atom text-7xl"></i>
+        </div>
+    </div>
+    
     <!-- Main container -->
-    <div class="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
+    <div class="container mx-auto px-4 py-8 md:py-12 max-w-6xl relative z-10">
         <!-- Header -->
         <header class="text-center mb-12 md:mb-16">
-            <div class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-dark-800 mb-6">
-                <i class="fas fa-bolt text-electric-400 mr-2"></i>
-                <span class="text-sm font-medium text-electric-400">ENGENHARIA ELÉTRICA</span>
+            <div class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-dark-800 mb-6 border border-electric-800/30 hover:border-electric-500/50 transition-all duration-300 shadow-lg hover:shadow-electric-500/10">
+                <i class="fas fa-bolt text-electric-400 mr-2 electric-pulse"></i>
+                <span class="text-sm font-medium text-electric-400 tracking-wider">ENGENHARIA ELÉTRICA</span>
             </div>
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">
-                <span class="gradient-text">Projeto Acadêmico</span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                <span class="gradient-text">Projeto Escolar</span>
             </h1>
-            <p class="text-lg text-gray-400 max-w-2xl mx-auto">
-                Explorando as fronteiras da energia e tecnologia
+            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                Saiba mais sobre o mundo da engenharia elétrica através de uma entrevista com um profissionai
             </p>
         </header>
-        
-<!-- Video section -->
-<section class="flex justify-center mb-16 md:mb-20">
-    <div class="video-container bg-dark-800 rounded-2xl overflow-hidden relative w-full max-w-md">
-        <iframe 
-            class="w-full h-full" 
-            src="https://www.youtube.com/embed/m3RmHVx1Gog" 
-            title="Entrevista em Vídeo" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-        </iframe>
-    </div>
-</section>
-        
+
+        <!-- Video section -->
+        <section class="flex flex-col items-center mb-16 md:mb-20">
+            <div class="w-full max-w-4xl mb-8 text-center">
+                <h2 class="text-2xl md:text-3xl font-bold mb-3">
+                    <span class="gradient-text">Entrevista Exclusiva</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Assista nossa conversa com um engenheiro elétrico experiente
+                </p>
+            </div>
+            
+            <div class="video-container bg-dark-800 w-full">
+                <iframe 
+                    class="w-full h-full"
+                    src="https://www.youtube.com/embed/m3RmHVx1Gog" 
+                    title="Entrevista em Vídeo"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
         <!-- Team section -->
         <section class="mb-16">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-3">Conheça Nosso <span class="gradient-text">Time</span></h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-electric-500 to-electric-600 mx-auto rounded-full"></div>
+                <div class="w-24 h-1 bg-gradient-to-r from-electric-500 to-electric-600 mx-auto rounded-full mb-2"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Os talentosos estudantes por trás deste projeto inovador
+                </p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -136,7 +275,7 @@
                 <div class="member-card rounded-xl p-6">
                     <div class="flex items-center mb-4">
                         <div class="w-16 h-16 rounded-full bg-dark-700 flex items-center justify-center mr-4 avatar-ring">
-                            <i class="fas fa-user text-xl text-electric-400"></i>
+                            <i class="fas fa-lightbulb text-xl text-electric-400"></i>
                         </div>
                         <div>
                             <h3 class="text-xl font-semibold">Gabriel Molossi</h3>
@@ -144,11 +283,12 @@
                         </div>
                     </div>
                     <p class="text-gray-400 mb-4 text-sm leading-relaxed">
-                        Responsável pelas idéias e apresentação do projeto, garantindo clareza e impacto na comunicação.
+                        Responsável pelas idéias e apresentação do projeto, garantindo clareza e impacto na comunicação. Demonstrou habilidades excepcionais de síntese e criatividade.
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400">Idéias</span>
-                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400">Apresentação</span>
+                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Idéias</span>
+                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Apresentação</span>
+                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Criatividade</span>
                     </div>
                 </div>
                 
@@ -156,7 +296,7 @@
                 <div class="member-card rounded-xl p-6">
                     <div class="flex items-center mb-4">
                         <div class="w-16 h-16 rounded-full bg-dark-700 flex items-center justify-center mr-4 avatar-ring">
-                            <i class="fas fa-user text-xl text-electric-400"></i>
+                            <i class="fas fa-search text-xl text-electric-400"></i>
                         </div>
                         <div>
                             <h3 class="text-xl font-semibold">Alex Junior</h3>
@@ -164,11 +304,12 @@
                         </div>
                     </div>
                     <p class="text-gray-400 mb-4 text-sm leading-relaxed">
-                        Responsável pela pesquisa e apresentação, assegurando fundamentação teórica e precisão nos dados.
+                        Responsável pela pesquisa e apresentação, assegurando fundamentação teórica e precisão nos dados. Excelente capacidade analítica e atenção aos detalhes.
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400">Pesquisa</span>
-                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400">Apresentação</span>
+                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Pesquisa</span>
+                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Apresentação</span>
+                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Análise</span>
                     </div>
                 </div>
                 
@@ -176,7 +317,7 @@
                 <div class="member-card rounded-xl p-6">
                     <div class="flex items-center mb-4">
                         <div class="w-16 h-16 rounded-full bg-dark-700 flex items-center justify-center mr-4 avatar-ring">
-                            <i class="fas fa-user text-xl text-electric-400"></i>
+                            <i class="fas fa-code text-xl text-electric-400"></i>
                         </div>
                         <div>
                             <h3 class="text-xl font-semibold">Elber</h3>
@@ -184,60 +325,127 @@
                         </div>
                     </div>
                     <p class="text-gray-400 mb-4 text-sm leading-relaxed">
-                        Responsável pelo desenvolvimento e apresentação, implementando soluções práticas e eficientes.
+                        Responsável pelo desenvolvimento e apresentação, implementando soluções práticas e eficientes. Habilidades técnicas impressionantes e visão prática.
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400">Desenvolvimento</span>
-                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400">Apresentação</span>
+                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Desenvolvimento</span>
+                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Apresentação</span>
+                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Técnica</span>
                     </div>
                 </div>
             </div>
         </section>
         
+        <!-- Project details section -->
+        <section class="mb-16 bg-dark-800/50 rounded-xl p-8 border border-dark-700 backdrop-blur-sm">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">
+                        <span class="gradient-text">Sobre o Projeto</span>
+                    </h2>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Este projeto escolar teve como objetivo principal explorar o campo da  faculdade de engenharia elétrica através de uma apresentação e uma entrevista com profissionai experientes, buscando entender os desafios, oportunidades e o dia a dia desta fascinante profissão.
+                    </p>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Durante o desenvolvimento, aprendemos sobre circuitos elétricos, sistemas de energia, automação industrial e as diversas especializações dentro da engenharia elétrica.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-electric-500/10 text-electric-400 border border-electric-500/20">
+                            <i class="fas fa-bolt mr-2"></i> Energia
+                        </span>
+                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-electric-500/10 text-electric-400 border border-electric-500/20">
+                            <i class="fas fa-microchip mr-2"></i> Eletrônica
+                        </span>
+                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-electric-500/10 text-electric-400 border border-electric-500/20">
+                            <i class="fas fa-robot mr-2"></i> Automação
+                        </span>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <div class="w-full max-w-md h-64 bg-gradient-to-br from-electric-900 to-electric-700 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-project-diagram text-6xl text-white opacity-80"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Footer -->
         <footer class="text-center pt-8 border-t border-dark-700 mt-12">
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="#" class="text-gray-400 hover:text-electric-400 transition-colors">
-                    <i class="fab fa-youtube text-xl"></i>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="social-icon text-gray-400 hover:text-electric-400">
+                    <i class="fab fa-youtube text-2xl"></i>
                 </a>
-                <a href="#" class="text-gray-400 hover:text-electric-400 transition-colors">
-                    <i class="fab fa-instagram text-xl"></i>
+                <a href="#" class="social-icon text-gray-400 hover:text-electric-400">
+                    <i class="fab fa-instagram text-2xl"></i>
                 </a>
-                <a href="#" class="text-gray-400 hover:text-electric-400 transition-colors">
-                    <i class="fab fa-github text-xl"></i>
+                <a href="#" class="social-icon text-gray-400 hover:text-electric-400">
+                    <i class="fab fa-github text-2xl"></i>
                 </a>
             </div>
-            <p class="text-gray-500 text-sm">
-                Projeto acadêmico - Engenharia Elétrica © <span id="current-year"></span>
+            <p class="text-gray-500 text-sm mb-2">
+                Projeto Escolar - Engenharia Elétrica
+            </p>
+            <p class="text-gray-600 text-xs">
+                © <span id="current-year"></span> Todos os direitos reservados
             </p>
         </footer>
     </div>
     
+    <!-- Back to top button -->
+    <div class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up text-electric-400"></i>
+    </div>
+
     <script>
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
-        // Video play functionality
-        document.addEventListener('DOMContentLoaded', () => {
-            const videoPlaceholder = document.querySelector('.video-container');
-            if (videoPlaceholder) {
-                videoPlaceholder.addEventListener('click', () => {
-                    const playButton = videoPlaceholder.querySelector('.play-button');
-                    const playIcon = videoPlaceholder.querySelector('.fa-play');
-                    
-                    if (playIcon) {
-                        playIcon.classList.remove('fa-play');
-                        playIcon.classList.add('fa-pause');
-                        
-                        // Here you would normally play the actual video
-                        // For this demo, we'll just change the background
-                        videoPlaceholder.style.background = `
-                            linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), 
-                            url(https://images.unsplash.com/photo-1508514177221-188e1eaf2cc5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1080&q=80) center/cover
-                        `;
-                    }
-                });
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
             }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Add ripple effect to member cards
+        document.querySelectorAll('.member-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                let x = e.clientX - e.target.getBoundingClientRect().left;
+                let y = e.clientY - e.target.getBoundingClientRect().top;
+                
+                let ripple = document.createElement('span');
+                ripple.classList.add('ripple-effect');
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1000);
+            });
+        });
+        
+        // Add parallax effect to floating icons
+        window.addEventListener('mousemove', (e) => {
+            const floatingIcons = document.querySelectorAll('.floating-icon');
+            floatingIcons.forEach((icon, index) => {
+                const speed = 0.02 + (index * 0.01);
+                const x = (window.innerWidth - e.pageX * speed) / 100;
+                const y = (window.innerHeight - e.pageY * speed) / 100;
+                icon.style.transform = `translate(${x}px, ${y}px)`;
+            });
         });
     </script>
 </body>
