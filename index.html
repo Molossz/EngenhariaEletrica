@@ -3,450 +3,426 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto de Engenharia Elétrica</title>
+    <title>Quebradores FC - Elenco</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        electric: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
-                        },
-                        dark: {
-                            900: '#0f172a',
-                            800: '#1e293b',
-                            700: '#334155',
-                            600: '#475569',
-                            500: '#64748b',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        }
+                        primary: '#0a192f',
+                        secondary: '#172a45',
+                        accent: '#64ffda',
+                        lightblue: '#8892b0',
+                        darkblue: '#020c1b'
                     }
                 }
             }
         }
     </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .circuit-pattern {
-            background-image: 
-                radial-gradient(rgba(30, 58, 138, 0.1) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 1));
-            background-size: 20px 20px, 100% 100%;
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0a192f;
+            color: #ccd6f6;
         }
         
-        .gradient-text {
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            background-image: linear-gradient(90deg, #3b82f6, #60a5fa);
-        }
-        
-        .video-container {
-            aspect-ratio: 16/9;
-            max-height: 80vh;
-            transition: all 0.3s ease;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
-            border-radius: 1rem;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .video-container:hover {
-            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.3);
+        .player-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
         
-        .member-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: linear-gradient(145deg, #1e293b, #0f172a);
-            border: 1px solid rgba(59, 130, 246, 0.1);
-            position: relative;
-            overflow: hidden;
+        .logo-glow {
+            filter: drop-shadow(0 0 8px rgba(100, 255, 218, 0.6));
         }
         
-        .member-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(59, 130, 246, 0) 0%,
-                rgba(59, 130, 246, 0.1) 50%,
-                rgba(59, 130, 246, 0) 100%
-            );
-            transform: rotate(30deg);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
+        .input-field:focus {
+            outline: none;
+            border-color: #64ffda;
+            box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.2);
         }
         
-        .member-card:hover::before {
-            opacity: 1;
-            top: -30%;
-            left: -30%;
-        }
-        
-        .member-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(59, 130, 246, 0.3);
-            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.05);
-        }
-        
-        .avatar-ring {
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+        .position-badge {
             transition: all 0.3s ease;
         }
         
-        .member-card:hover .avatar-ring {
-            box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.8);
-            transform: scale(1.05);
+        .position-badge:hover {
+            background-color: #64ffda;
+            color: #0a192f;
         }
         
-        .tag {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            transition: all 0.2s ease;
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
         
-        .tag:hover {
-            background: rgba(59, 130, 246, 0.2);
-            transform: translateY(-2px);
+        ::-webkit-scrollbar-track {
+            background: #0a192f;
         }
         
-        .play-button {
-            transition: all 0.3s ease;
+        ::-webkit-scrollbar-thumb {
+            background: #64ffda;
+            border-radius: 4px;
         }
         
-        .play-button:hover {
-            transform: scale(1.1);
-        }
-        
-        .section-divider {
-            height: 2px;
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0), rgba(59, 130, 246, 0.5), rgba(59, 130, 246, 0));
-            margin: 3rem auto;
-            max-width: 800px;
-        }
-        
-        .electric-pulse {
-            animation: pulse-slow 4s infinite;
-        }
-        
-        .floating-icon {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .floating-icon:nth-child(2) {
-            animation-delay: 1s;
-        }
-        
-        .floating-icon:nth-child(3) {
-            animation-delay: 2s;
-        }
-        
-        .social-icon {
-            transition: all 0.3s ease;
-        }
-        
-        .social-icon:hover {
-            transform: translateY(-3px) scale(1.1);
-            color: #3b82f6 !important;
-        }
-        
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: rgba(59, 130, 246, 0.2);
-            width: 3rem;
-            height: 3rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0;
-            visibility: hidden;
-            z-index: 100;
-        }
-        
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .back-to-top:hover {
-            background: rgba(59, 130, 246, 0.3);
-            transform: translateY(-5px);
+        ::-webkit-scrollbar-thumb:hover {
+            background: #52d6c4;
         }
     </style>
 </head>
-<body class="min-h-screen bg-dark-900 text-gray-200 font-sans circuit-pattern">
-    <!-- Floating decorative elements -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div class="absolute top-1/4 left-1/4 text-electric-400 opacity-10 floating-icon">
-            <i class="fas fa-bolt text-6xl"></i>
-        </div>
-        <div class="absolute top-1/3 right-1/4 text-electric-500 opacity-15 floating-icon">
-            <i class="fas fa-microchip text-5xl"></i>
-        </div>
-        <div class="absolute bottom-1/4 left-1/3 text-electric-600 opacity-10 floating-icon">
-            <i class="fas fa-atom text-7xl"></i>
-        </div>
-    </div>
-    
-    <!-- Main container -->
-    <div class="container mx-auto px-4 py-8 md:py-12 max-w-6xl relative z-10">
-        <!-- Header -->
-        <header class="text-center mb-12 md:mb-16">
-            <div class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-dark-800 mb-6 border border-electric-800/30 hover:border-electric-500/50 transition-all duration-300 shadow-lg hover:shadow-electric-500/10">
-                <i class="fas fa-bolt text-electric-400 mr-2 electric-pulse"></i>
-                <span class="text-sm font-medium text-electric-400 tracking-wider">ENGENHARIA ELÉTRICA</span>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="bg-primary py-6 px-4 shadow-lg">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+            <div class="flex items-center mb-4 md:mb-0">
+                <img src="https://i.postimg.cc/J0kZF1yG/Quebradores-Principal-Sem-Fundo.png" alt="Quebradores FC Logo" class="logo-glow h-16 mr-4">
+                <h1 class="text-3xl font-bold text-accent">Quebradores FC</h1>
             </div>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-                <span class="gradient-text">Projeto Escolar</span>
-            </h1>
-            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Saiba mais sobre o mundo da engenharia elétrica através de uma entrevista com um profissionai
-            </p>
-        </header>
+            <nav class="flex space-x-6">
+                <a href="#" class="text-lightblue hover:text-accent transition duration-300">Elenco</a>
+                <a href="#" class="text-lightblue hover:text-accent transition duration-300">Estatísticas</a>
+                <a href="#" class="text-lightblue hover:text-accent transition duration-300">Partidas</a>
+                <a href="#" class="text-lightblue hover:text-accent transition duration-300">Contato</a>
+            </nav>
+        </div>
+    </header>
 
-        <!-- Video section -->
-        <section class="flex flex-col items-center mb-16 md:mb-20">
-            <div class="w-full max-w-4xl mb-8 text-center">
-                <h2 class="text-2xl md:text-3xl font-bold mb-3">
-                    <span class="gradient-text">Entrevista Exclusiva</span>
-                </h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    Assista nossa conversa com um engenheiro elétrico experiente
-                </p>
-            </div>
-            
-            <div class="video-container bg-dark-800 w-full">
-                <iframe 
-                    class="w-full h-full"
-                    src="https://www.youtube.com/embed/m3RmHVx1Gog" 
-                    title="Entrevista em Vídeo"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-            </div>
-        </section>
-
-        <!-- Team section -->
-        <section class="mb-16">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-3">Conheça Nosso <span class="gradient-text">Time</span></h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-electric-500 to-electric-600 mx-auto rounded-full mb-2"></div>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    Os talentosos estudantes por trás deste projeto inovador
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                <!-- Member 1 -->
-                <div class="member-card rounded-xl p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 rounded-full bg-dark-700 flex items-center justify-center mr-4 avatar-ring">
-                            <i class="fas fa-lightbulb text-xl text-electric-400"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold">Gabriel Molossi</h3>
-                            <p class="text-electric-400 text-sm">N° 13</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-400 mb-4 text-sm leading-relaxed">
-                        Responsável pelas idéias e apresentação do projeto, garantindo clareza e impacto na comunicação. Demonstrou habilidades excepcionais de síntese e criatividade.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Idéias</span>
-                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Apresentação</span>
-                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Criatividade</span>
-                    </div>
+    <!-- Main Content -->
+    <main class="container mx-auto py-8 px-4">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Player List Section -->
+            <section class="lg:w-2/3">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-semibold text-accent">Elenco Atual</h2>
+                    <button id="toggleFormBtn" class="bg-accent text-primary px-4 py-2 rounded-md font-medium hover:bg-opacity-90 transition duration-300 flex items-center">
+                        <i class="fas fa-plus mr-2"></i> Novo Jogador
+                    </button>
                 </div>
                 
-                <!-- Member 2 -->
-                <div class="member-card rounded-xl p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 rounded-full bg-dark-700 flex items-center justify-center mr-4 avatar-ring">
-                            <i class="fas fa-search text-xl text-electric-400"></i>
-                        </div>
+                <!-- Player Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="playersGrid">
+                    <!-- Player cards will be dynamically inserted here -->
+                </div>
+            </section>
+            
+            <!-- New Player Form (Hidden by default) -->
+            <section id="newPlayerForm" class="lg:w-1/3 hidden">
+                <div class="bg-secondary p-6 rounded-lg shadow-lg sticky top-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold text-accent">Cadastrar Novo Jogador</h2>
+                        <button id="closeFormBtn" class="text-lightblue hover:text-accent">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <form id="playerForm" class="space-y-4">
                         <div>
-                            <h3 class="text-xl font-semibold">Alex Junior</h3>
-                            <p class="text-electric-400 text-sm">N° 1</p>
+                            <label for="name" class="block text-sm font-medium text-lightblue mb-1">Nome Completo</label>
+                            <input type="text" id="name" name="name" class="w-full bg-darkblue border border-lightblue rounded-md px-4 py-2 text-white input-field" required>
                         </div>
-                    </div>
-                    <p class="text-gray-400 mb-4 text-sm leading-relaxed">
-                        Responsável pela pesquisa e apresentação, assegurando fundamentação teórica e precisão nos dados. Excelente capacidade analítica e atenção aos detalhes.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Pesquisa</span>
-                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Apresentação</span>
-                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Análise</span>
-                    </div>
-                </div>
-                
-                <!-- Member 3 -->
-                <div class="member-card rounded-xl p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 rounded-full bg-dark-700 flex items-center justify-center mr-4 avatar-ring">
-                            <i class="fas fa-code text-xl text-electric-400"></i>
-                        </div>
+                        
                         <div>
-                            <h3 class="text-xl font-semibold">Elber</h3>
-                            <p class="text-electric-400 text-sm">N° 9</p>
+                            <label for="nickname" class="block text-sm font-medium text-lightblue mb-1">Apelido</label>
+                            <input type="text" id="nickname" name="nickname" class="w-full bg-darkblue border border-lightblue rounded-md px-4 py-2 text-white input-field" required>
                         </div>
-                    </div>
-                    <p class="text-gray-400 mb-4 text-sm leading-relaxed">
-                        Responsável pelo desenvolvimento e apresentação, implementando soluções práticas e eficientes. Habilidades técnicas impressionantes e visão prática.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Desenvolvimento</span>
-                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Apresentação</span>
-                        <span class="tag px-3 py-1 rounded-full text-xs font-medium text-electric-400 hover:bg-electric-500/20">Técnica</span>
-                    </div>
+                        
+                        <div>
+                            <label for="gamertag" class="block text-sm font-medium text-lightblue mb-1">Nick no Jogo</label>
+                            <input type="text" id="gamertag" name="gamertag" class="w-full bg-darkblue border border-lightblue rounded-md px-4 py-2 text-white input-field" required>
+                        </div>
+                        
+                        <div>
+                            <label for="level" class="block text-sm font-medium text-lightblue mb-1">Nível</label>
+                            <input type="number" id="level" name="level" class="w-full bg-darkblue border border-lightblue rounded-md px-4 py-2 text-white input-field" required>
+                        </div>
+                        
+                        <div>
+                            <label for="shirtNumber" class="block text-sm font-medium text-lightblue mb-1">Número da Camisa</label>
+                            <input type="text" id="shirtNumber" name="shirtNumber" class="w-full bg-darkblue border border-lightblue rounded-md px-4 py-2 text-white input-field" required>
+                        </div>
+                        
+                        <div>
+                            <label for="mainPosition" class="block text-sm font-medium text-lightblue mb-1">Posição Principal</label>
+                            <select id="mainPosition" name="mainPosition" class="w-full bg-darkblue border border-lightblue rounded-md px-4 py-2 text-white input-field" required>
+                                <option value="">Selecione</option>
+                                <option value="Goleiro">Goleiro</option>
+                                <option value="Zagueiro">Zagueiro</option>
+                                <option value="Lateral">Lateral</option>
+                                <option value="Volante">Volante</option>
+                                <option value="Meia">Meia</option>
+                                <option value="Atacante">Atacante</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="secondaryPosition" class="block text-sm font-medium text-lightblue mb-1">Posição Secundária</label>
+                            <select id="secondaryPosition" name="secondaryPosition" class="w-full bg-darkblue border border-lightblue rounded-md px-4 py-2 text-white input-field">
+                                <option value="">Nenhuma</option>
+                                <option value="Goleiro">Goleiro</option>
+                                <option value="Zagueiro">Zagueiro</option>
+                                <option value="Lateral">Lateral</option>
+                                <option value="Volante">Volante</option>
+                                <option value="Meia">Meia</option>
+                                <option value="Atacante">Atacante</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="age" class="block text-sm font-medium text-lightblue mb-1">Idade Real</label>
+                            <input type="number" id="age" name="age" class="w-full bg-darkblue border border-lightblue rounded-md px-4 py-2 text-white input-field" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-lightblue mb-2">Tem Microfone?</label>
+                            <div class="flex space-x-4">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="hasMicrophone" value="Sim" class="text-accent" checked>
+                                    <span class="ml-2">Sim</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="hasMicrophone" value="Não" class="text-accent">
+                                    <span class="ml-2">Não</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="platform" class="block text-sm font-medium text-lightblue mb-1">Plataforma</label>
+                            <select id="platform" name="platform" class="w-full bg-darkblue border border-lightblue rounded-md px-4 py-2 text-white input-field" required>
+                                <option value="">Selecione</option>
+                                <option value="PC">PC</option>
+                                <option value="Xbox">Xbox</option>
+                                <option value="PlayStation">PlayStation</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="availability" class="block text-sm font-medium text-lightblue mb-1">Disponibilidade</label>
+                            <input type="text" id="availability" name="availability" class="w-full bg-darkblue border border-lightblue rounded-md px-4 py-2 text-white input-field" required>
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-lightblue mb-1">Telefone</label>
+                            <input type="tel" id="phone" name="phone" class="w-full bg-darkblue border border-lightblue rounded-md px-4 py-2 text-white input-field" required>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-accent text-primary py-2 rounded-md font-medium hover:bg-opacity-90 transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-save mr-2"></i> Cadastrar Jogador
+                        </button>
+                    </form>
                 </div>
-            </div>
-        </section>
-        
-        <!-- Project details section -->
-        <section class="mb-16 bg-dark-800/50 rounded-xl p-8 border border-dark-700 backdrop-blur-sm">
-            <div class="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4">
-                        <span class="gradient-text">Sobre o Projeto</span>
-                    </h2>
-                    <p class="text-gray-400 mb-4 leading-relaxed">
-                        Este projeto escolar teve como objetivo principal explorar o campo da  faculdade de engenharia elétrica através de uma apresentação e uma entrevista com profissionai experientes, buscando entender os desafios, oportunidades e o dia a dia desta fascinante profissão.
-                    </p>
-                    <p class="text-gray-400 mb-6 leading-relaxed">
-                        Durante o desenvolvimento, aprendemos sobre circuitos elétricos, sistemas de energia, automação industrial e as diversas especializações dentro da engenharia elétrica.
-                    </p>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-electric-500/10 text-electric-400 border border-electric-500/20">
-                            <i class="fas fa-bolt mr-2"></i> Energia
-                        </span>
-                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-electric-500/10 text-electric-400 border border-electric-500/20">
-                            <i class="fas fa-microchip mr-2"></i> Eletrônica
-                        </span>
-                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-electric-500/10 text-electric-400 border border-electric-500/20">
-                            <i class="fas fa-robot mr-2"></i> Automação
-                        </span>
-                    </div>
-                </div>
-                <div class="flex justify-center">
-                    <div class="w-full max-w-md h-64 bg-gradient-to-br from-electric-900 to-electric-700 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-project-diagram text-6xl text-white opacity-80"></i>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
+    </main>
 
-        <!-- Footer -->
-        <footer class="text-center pt-8 border-t border-dark-700 mt-12">
-            <div class="flex justify-center space-x-6 mb-6">
-                <a href="#" class="social-icon text-gray-400 hover:text-electric-400">
-                    <i class="fab fa-youtube text-2xl"></i>
-                </a>
-                <a href="#" class="social-icon text-gray-400 hover:text-electric-400">
-                    <i class="fab fa-instagram text-2xl"></i>
-                </a>
-                <a href="#" class="social-icon text-gray-400 hover:text-electric-400">
-                    <i class="fab fa-github text-2xl"></i>
-                </a>
+    <!-- Footer -->
+    <footer class="bg-primary py-8 px-4 border-t border-secondary">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <img src="https://i.postimg.cc/J0kZF1yG/Quebradores-Principal-Sem-Fundo.png" alt="Quebradores FC Logo" class="h-12 mr-4">
+                    <span class="text-lightblue">© 2023 Quebradores FC. Todos os direitos reservados.</span>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-lightblue hover:text-accent transition duration-300">
+                        <i class="fab fa-discord fa-lg"></i>
+                    </a>
+                    <a href="#" class="text-lightblue hover:text-accent transition duration-300">
+                        <i class="fab fa-twitter fa-lg"></i>
+                    </a>
+                    <a href="#" class="text-lightblue hover:text-accent transition duration-300">
+                        <i class="fab fa-instagram fa-lg"></i>
+                    </a>
+                </div>
             </div>
-            <p class="text-gray-500 text-sm mb-2">
-                Projeto Escolar - Engenharia Elétrica
-            </p>
-            <p class="text-gray-600 text-xs">
-                © <span id="current-year"></span> Todos os direitos reservados
-            </p>
-        </footer>
-    </div>
-    
-    <!-- Back to top button -->
-    <div class="back-to-top" id="back-to-top">
-        <i class="fas fa-arrow-up text-electric-400"></i>
-    </div>
+        </div>
+    </footer>
 
     <script>
-        // Set current year in footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        // Back to top button
-        const backToTopButton = document.getElementById('back-to-top');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.add('visible');
+        // Sample player data
+        const players = [
+            {
+                name: "Edu",
+                nickname: "-",
+                gamertag: "Drefyt",
+                level: 28,
+                shirtNumber: "12",
+                mainPosition: "Goleiro",
+                secondaryPosition: "-",
+                age: 16,
+                hasMicrophone: "Sim",
+                platform: "Xbox",
+                availability: "Tarde e noite",
+                phone: "+55 48 9859-7813"
+            },
+            {
+                name: "Carlos",
+                nickname: "CL",
+                gamertag: "CL",
+                level: 120,
+                shirtNumber: "4",
+                mainPosition: "Zagueiro",
+                secondaryPosition: "Volante",
+                age: 18,
+                hasMicrophone: "Sim",
+                platform: "Xbox",
+                availability: "Tarde e noite",
+                phone: "+55 21 96685-3603"
+            },
+            {
+                name: "Gabriel",
+                nickname: "GB",
+                gamertag: "gbsz15",
+                level: 120,
+                shirtNumber: "25 ou 88",
+                mainPosition: "Zagueiro",
+                secondaryPosition: "Volante",
+                age: 21,
+                hasMicrophone: "Sim",
+                platform: "PC",
+                availability: "Tarde e noite",
+                phone: "+55 21 97419-4964"
+            },
+            {
+                name: "Davi",
+                nickname: "Davizin",
+                gamertag: "Dvzzz0500",
+                level: 120,
+                shirtNumber: "1 ou 87",
+                mainPosition: "Goleiro",
+                secondaryPosition: "Zagueiro",
+                age: 14,
+                hasMicrophone: "Sim",
+                platform: "PC",
+                availability: "Noite",
+                phone: "+55 21 99989-9370"
+            }
+        ];
+
+        // DOM Elements
+        const playersGrid = document.getElementById('playersGrid');
+        const toggleFormBtn = document.getElementById('toggleFormBtn');
+        const closeFormBtn = document.getElementById('closeFormBtn');
+        const newPlayerForm = document.getElementById('newPlayerForm');
+        const playerForm = document.getElementById('playerForm');
+
+        // Render players
+        function renderPlayers() {
+            playersGrid.innerHTML = '';
+            
+            players.forEach(player => {
+                const playerCard = document.createElement('div');
+                playerCard.className = 'bg-secondary rounded-lg overflow-hidden shadow-md player-card transition duration-300';
+                
+                playerCard.innerHTML = `
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-accent">${player.name}</h3>
+                                <p class="text-lightblue">"${player.nickname}"</p>
+                            </div>
+                            <span class="bg-accent text-primary px-3 py-1 rounded-full text-sm font-semibold">Nível ${player.level}</span>
+                        </div>
+                        
+                        <div class="flex items-center mb-4">
+                            <span class="bg-darkblue text-accent px-3 py-1 rounded-full text-sm font-semibold mr-2">#${player.shirtNumber}</span>
+                            <span class="text-lightblue">${player.gamertag}</span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="flex flex-wrap gap-2 mb-2">
+                                <span class="position-badge bg-darkblue text-accent px-3 py-1 rounded-full text-xs font-semibold">${player.mainPosition}</span>
+                                ${player.secondaryPosition !== '-' ? 
+                                    `<span class="position-badge bg-darkblue text-lightblue px-3 py-1 rounded-full text-xs font-semibold">${player.secondaryPosition}</span>` : ''}
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <p class="text-xs text-lightblue uppercase">Idade</p>
+                                <p class="font-medium">${player.age} anos</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-lightblue uppercase">Microfone</p>
+                                <p class="font-medium ${player.hasMicrophone === 'Sim' ? 'text-green-400' : 'text-red-400'}">${player.hasMicrophone}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-lightblue uppercase">Plataforma</p>
+                                <p class="font-medium">${player.platform}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-lightblue uppercase">Disponibilidade</p>
+                                <p class="font-medium">${player.availability}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between border-t border-darkblue pt-4">
+                            <a href="tel:${player.phone}" class="text-accent hover:underline flex items-center">
+                                <i class="fas fa-phone mr-2"></i> Contato
+                            </a>
+                            <button class="text-red-400 hover:text-red-300 flex items-center">
+                                <i class="fas fa-trash-alt mr-2"></i> Remover
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                playersGrid.appendChild(playerCard);
+            });
+        }
+
+        // Toggle form visibility
+        toggleFormBtn.addEventListener('click', () => {
+            newPlayerForm.classList.toggle('hidden');
+            if (!newPlayerForm.classList.contains('hidden')) {
+                toggleFormBtn.innerHTML = '<i class="fas fa-users mr-2"></i> Ver Elenco';
             } else {
-                backToTopButton.classList.remove('visible');
+                toggleFormBtn.innerHTML = '<i class="fas fa-plus mr-2"></i> Novo Jogador';
             }
         });
-        
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+
+        closeFormBtn.addEventListener('click', () => {
+            newPlayerForm.classList.add('hidden');
+            toggleFormBtn.innerHTML = '<i class="fas fa-plus mr-2"></i> Novo Jogador';
         });
-        
-        // Add ripple effect to member cards
-        document.querySelectorAll('.member-card').forEach(card => {
-            card.addEventListener('click', function(e) {
-                let x = e.clientX - e.target.getBoundingClientRect().left;
-                let y = e.clientY - e.target.getBoundingClientRect().top;
-                
-                let ripple = document.createElement('span');
-                ripple.classList.add('ripple-effect');
-                ripple.style.left = `${x}px`;
-                ripple.style.top = `${y}px`;
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 1000);
-            });
+
+        // Handle form submission
+        playerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(playerForm);
+            const newPlayer = {
+                name: formData.get('name'),
+                nickname: formData.get('nickname'),
+                gamertag: formData.get('gamertag'),
+                level: parseInt(formData.get('level')),
+                shirtNumber: formData.get('shirtNumber'),
+                mainPosition: formData.get('mainPosition'),
+                secondaryPosition: formData.get('secondaryPosition') || '-',
+                age: parseInt(formData.get('age')),
+                hasMicrophone: formData.get('hasMicrophone'),
+                platform: formData.get('platform'),
+                availability: formData.get('availability'),
+                phone: formData.get('phone')
+            };
+            
+            players.push(newPlayer);
+            renderPlayers();
+            playerForm.reset();
+            
+            // Show success message
+            alert('Jogador cadastrado com sucesso!');
+            
+            // Hide form after submission
+            newPlayerForm.classList.add('hidden');
+            toggleFormBtn.innerHTML = '<i class="fas fa-plus mr-2"></i> Novo Jogador';
         });
-        
-        // Add parallax effect to floating icons
-        window.addEventListener('mousemove', (e) => {
-            const floatingIcons = document.querySelectorAll('.floating-icon');
-            floatingIcons.forEach((icon, index) => {
-                const speed = 0.02 + (index * 0.01);
-                const x = (window.innerWidth - e.pageX * speed) / 100;
-                const y = (window.innerHeight - e.pageY * speed) / 100;
-                icon.style.transform = `translate(${x}px, ${y}px)`;
-            });
-        });
+
+        // Initial render
+        renderPlayers();
     </script>
 </body>
 </html>
